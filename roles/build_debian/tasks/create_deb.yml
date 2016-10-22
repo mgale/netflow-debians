@@ -1,0 +1,118 @@
+---
+
+#- name: Setting pre-build vars
+#  set_fact:
+#    program_name: "{{ item.name }}"
+#    version: "{{ item.version }}"
+
+- name: Setting build vars
+  set_fact:
+    src: "{{ program_name }}-{{ version }}"
+    origfile: "{{ program_name }}_{{ version }}.orig.tar.gz"
+    package_source: "{{ program_name }}_{{ version }}_source"
+    debian_dir: "{{ program_name }}-debian"
+    build_location: "/tmp/debian_build_{{ program_name }}"
+  tags:
+    - always
+
+- name: Setting filename
+  set_fact:
+    filename: "{{ src }}.tar.gz"
+  tags:
+    - always
+
+- name: Cleaning up build dir
+  file:
+    path: "{{ build_location }}"
+    state: absent
+  tags:
+    - build_prep
+    - build_only
+
+- name: Create build dir
+  file:
+    path: "{{ build_location }}"
+    state: directory
+    mode: 0755
+  tags:
+    - build_prep
+    - build_only
+
+- name: Build dir
+  debug:
+    msg: "{{ build_location }}"
+  tags:
+    - build_prep
+    - build_only
+
+- name: Get source file
+  get_url:
+    url: "{{ url_base }}/{{ filename }}"
+    dest: "{{ build_tmp }}/{{ filename }}"
+    mode: 0440
+  tags:
+    - get_sources
+    - build_only
+
+- name: Create original resource
+  copy:
+    src: "{{ build_tmp }}/{{ filename }}"
+    dest: "{{ build_location }}/{{ origfile }}"
+    mode: 0644
+  tags:
+    - build_prep
+    - build_only
+
+- name: Extract source
+  unarchive:
+    src: "{{ build_tmp }}/{{ filename }}"
+    dest: "{{ build_location }}"
+  tags:
+    - build_prep
+    - build_only
+
+- name: Move debian dir into place
+  copy:
+    src: "{{ debian_dir }}/"
+    dest: "{{ build_location }}/{{ src }}/debian"
+  tags:
+    - build_prep
+    - build_only
+
+- name: Building deb
+  command: "debuild -us -uc -b"
+  args:
+    chdir: "{{ build_location }}/{{ src }}"
+  register: debuild_result
+  tags:
+    - build_deb
+    - build_only
+
+- name: Signing deb
+  command: "debuild -S -sa -k{{ GPGKEY }}"
+  args:
+    chdir: "{{ build_location }}/{{ src }}"
+  register: debuild_sign_result
+  when: "debuild_result.rc == 0"
+  tags:
+    - build_deb
+
+- name: Find source changes
+  find:
+    paths: "{{ build_location }}/"
+    patterns: "*_source.changes"
+  register: source_changes
+  tags:
+    - build_deb
+    - push_deb
+
+- name: Uploading deb
+  command: "dput ppa:gale-michael/netflow-tools-ppa {{ source_changes.files[0].path }}"
+  args:
+    chdir: "{{ build_location }}"
+  register: dput_result
+  when:
+    - "source_changes.matched == 1"
+  tags:
+    - build_deb
+    - push_deb

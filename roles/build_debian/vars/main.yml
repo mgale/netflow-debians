@@ -1,0 +1,19 @@
+---
+
+required_packages:
+  - wget
+  - devscripts
+  - libglib2.0-dev
+  - libsctp-dev
+  - libssl-dev
+  - pkg-config
+  - debhelper
+
+url_base: "http://tools.netsa.cert.org/releases"
+
+build_tmp: "/tmp"
+
+#build_items:
+#  - { name: "yaf", version: "2.8.4" }
+#  - { name: "libfixbuff", version: "1.7.1" }
+#  - { name: "silk" , version: "3.13.0" }

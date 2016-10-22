@@ -1,0 +1,10 @@
+---
+
+- name: Install list of packages
+  apt:
+    name: "{{item}}"
+    state: installed
+  with_items: "{{ required_packages }}"
+  tags:
+    - packages
+    - always
