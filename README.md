@@ -16,4 +16,4 @@ To build the debians you need to execute the playbooy build_debs with a few extr
  - GPGKEY
 
  For example:
- ```ansible-playbook -i build_host_inventory.ini build_debs.yml --extra-vars "program_name=yaf version=2.8.4 GPGKEY=<YourKey>" --tags yaf```
+ ```ansible-playbook -i build_host_inventory.ini build_debs.yml --extra-vars "program_name=yaf GPGKEY=<YourKey>" --tags yaf```

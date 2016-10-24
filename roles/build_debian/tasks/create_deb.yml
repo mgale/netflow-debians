@@ -1,7 +1,8 @@
 ---
 
-#- name: Setting pre-build vars
-#  set_fact:
+- name: Setting pre-build vars
+  set_fact:
+    version: "{{ build_items[program_name] }}"
 #    program_name: "{{ item.name }}"
 #    version: "{{ item.version }}"
 
