@@ -1,0 +1,12 @@
+Source: libfixbuf
+Maintainer: Michael Gale <gale.michael@gmail.com>
+Section: misc
+Priority: optional
+Build-Depends: libglib2.0-dev, libsctp-dev, libssl-dev, pkg-config, debhelper (>= 9)
+XBS-Buildhost: ${hostname}
+XBS-Dgit: ${dgit}
+
+Package: libfixbuf
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libglib2.0-0, libsctp1, libssl1.0.0
+Description: fixbuf IPFIX implementation library
