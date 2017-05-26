@@ -1,4 +1,6 @@
 ---
 
 - include: install_packages.yml
-- include: create_deb.yml
+
+- include: create_deb.yml param={{item}}
+  with_dict: "{{ build_items }}"
