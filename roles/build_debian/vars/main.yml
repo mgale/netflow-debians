@@ -11,9 +11,9 @@ required_packages:
 
 url_base: "http://tools.netsa.cert.org/releases"
 
-build_tmp: "/tmp"
+download_tmp: "/tmp"
 
 build_items:
   yaf: "2.8.4"
-  silk: "3.13.0"
+  silk: "3.15.0"
   libfixbuff: "1.7.1"
