@@ -17,5 +17,5 @@ To build the debians you need to execute the playbooy build_debs, there are a fe
  - program_name
 
  For example:
- ```ansible-playbook build_debs.yml --ask-sudo-pass --extra-vars "GPGKEY=<YourKey>"```
- ```ansible-playbook build_debs.yml --ask-sudo-pass --extra-vars "--extra-vars program_name=libfixbuf"```
+ - ```ansible-playbook build_debs.yml --ask-sudo-pass --extra-vars "GPGKEY=<YourKey>"```
+ - ```ansible-playbook build_debs.yml --ask-sudo-pass --extra-vars "--extra-vars program_name=libfixbuf"```
