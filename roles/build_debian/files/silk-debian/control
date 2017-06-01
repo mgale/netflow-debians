@@ -2,11 +2,11 @@ Source: silk
 Maintainer: Michael Gale <gale.michael@gmail.com>
 Section: misc
 Priority: optional
-Build-Depends: libglib2.0-dev, libsctp-dev, libssl-dev, pkg-config, debhelper (>= 9)
+Build-Depends: libglib2.0-dev, libsctp-dev, libssl-dev, pkg-config, debhelper (>= 9), python-dev, libfixbuf (>=1.7.0), libpcap-dev
 XBS-Buildhost: ${hostname}
 XBS-Dgit: ${dgit}
 
 Package: silk
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, libglib2.0-0, libsctp1, libssl1.0.0 
-Description: silk netflow tools
+Depends: ${shlibs:Depends}, ${misc:Depends}, libglib2.0-0, libsctp1, libssl1.0.0, python, libfixbuf (>=1.7.0), libpcap
+Description: netflow analysis tools based on the silk netflow packages

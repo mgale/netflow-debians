@@ -16,4 +16,4 @@ download_tmp: "/tmp"
 build_items:
   yaf: "2.8.4"
   silk: "3.15.0"
-  libfixbuff: "1.7.1"
+  libfixbuf: "1.7.1"

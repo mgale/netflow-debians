@@ -1,0 +1,68 @@
+---
+
+- name: Setting pre-build vars
+  set_fact:
+    version: "{{ build_items[program_name] }}"
+  tags:
+    - always
+
+- name: Creating tmp build location
+  tempfile:
+    prefix: debian_build
+    state: directory
+  register: build_location
+  tags:
+    - always
+
+- name: Setting build vars
+  set_fact:
+    src: "{{ program_name }}-{{ version }}"
+    origfile: "{{ program_name }}_{{ version }}.orig.tar.gz"
+    package_source: "{{ program_name }}_{{ version }}_source"
+    debian_dir: "{{ program_name }}-debian"
+    build_location: "{{ build_location.path }}"
+  tags:
+    - always
+
+- name: Setting filename
+  set_fact:
+    filename: "{{ src }}.tar.gz"
+  tags:
+    - always
+
+- name: Building
+  debug:
+    msg: "Building {{ src }} using {{ build_location }}"
+  tags:
+    - always
+
+- name: Get source file
+  get_url:
+    url: "{{ url_base }}/{{ filename }}"
+    dest: "{{ download_tmp }}/{{ filename }}"
+    mode: 0440
+  tags:
+    - get_sources
+    - build_deb
+
+- name: Create original resource
+  copy:
+    src: "{{ download_tmp }}/{{ filename }}"
+    dest: "{{ build_location }}/{{ origfile }}"
+    mode: 0644
+  tags:
+    - build_deb
+
+- name: Extract source
+  unarchive:
+    src: "{{ download_tmp }}/{{ filename }}"
+    dest: "{{ build_location }}"
+  tags:
+    - build_deb
+
+- name: Move debian dir into place
+  copy:
+    src: "{{ debian_dir }}/"
+    dest: "{{ build_location }}/{{ src }}/debian"
+  tags:
+    - build_deb

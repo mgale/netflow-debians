@@ -8,12 +8,14 @@ This contains the debian build directory for sources from http://tools.netsa.cer
  - yaf
  - silk
 
+ The versions are stored in vars/main.yml
+
 # How To
 
-To build the debians you need to execute the playbooy build_debs, there are a few extra-vars that can be specified:
+To build the debians you need to execute the playbooy build_debs, there are a few extra-vars that need to be specified:
  - GPGKEY
- - build_items <--- Dictionary containing the program and version
+ - program_name
 
  For example:
  ```ansible-playbook build_debs.yml --ask-sudo-pass --extra-vars "GPGKEY=<YourKey>"```
- ```ansible-playbook build_debs.yml --ask-sudo-pass --extra-vars "--extra-vars '{"build_items":{"test":"123"}}'```
+ ```ansible-playbook build_debs.yml --ask-sudo-pass --extra-vars "--extra-vars program_name=libfixbuf"```

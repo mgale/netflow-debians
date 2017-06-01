@@ -1,6 +1,15 @@
 ---
 
-- include: install_packages.yml
+- name: Create the log file for this run
+  shell: /bin/bash -l -c "mv {{ lookup('env', 'HOME') }}/.ansible/log/build_deb_ansible.log  {{ lookup('env', 'HOME') }}/.ansible/log/build_deb_ansible.log-{{ lookup('pipe', 'date +%Y%m%d%H%M%S') }}"
+  delegate_to: localhost
+  become: yes
+  become_user: "{{ lookup('env', 'USER') }}"
 
-- include: create_deb.yml param={{item}}
-  with_dict: "{{ build_items }}"
+- include: install_packages.yml
+- include: create_build_env.yml
+
+- include: create_deb.yml
+  with_items:
+    - "trusty"
+    - "xenial"

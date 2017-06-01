@@ -1,4 +1,7 @@
 #!/usr/bin/make -f
- 
+
 %:
 		dh $@
+
+override_dh_auto_configure:
+	dh_auto_configure -- --enable-localtime --with-python --with-libfixbuf=/usr/lib/x86_64-linux-gnu/
