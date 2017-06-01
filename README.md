@@ -2,18 +2,20 @@
 
 This contains the debian build directory for sources from http://tools.netsa.cert.org/
 
-## Currently supports sources are
+## Currently supported sources are
 
  - libfixbuff
  - yaf
  - silk
 
+ The versions are stored in vars/main.yml
+
 # How To
 
-To build the debians you need to execute the playbooy build_debs with a few extra-vars:
- - progam_name <--- The name of the software you want to build the debian for
- - version     <--- The version you want to download
+To build the debians you need to execute the playbooy build_debs, there are a few extra-vars that need to be specified:
  - GPGKEY
+ - program_name
 
  For example:
- ```ansible-playbook -i build_host_inventory.ini build_debs.yml --extra-vars "program_name=yaf GPGKEY=<YourKey>" --tags yaf```
+ ```ansible-playbook build_debs.yml --ask-sudo-pass --extra-vars "GPGKEY=<YourKey>"```
+ ```ansible-playbook build_debs.yml --ask-sudo-pass --extra-vars "--extra-vars program_name=libfixbuf"```
