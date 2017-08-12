@@ -8,5 +8,5 @@ XBS-Dgit: ${dgit}
 
 Package: silk
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, libglib2.0-0, libsctp1, libssl1.0.0, python, libfixbuf (>=1.7.0), libpcap
+Depends: ${shlibs:Depends}, ${misc:Depends}, libglib2.0-0, libsctp1, libssl1.0.0, python, libfixbuf (>=1.7.0), libpcap0.8
 Description: netflow analysis tools based on the silk netflow packages

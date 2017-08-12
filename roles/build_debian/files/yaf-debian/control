@@ -2,13 +2,13 @@ Source: yaf
 Maintainer: Michael Gale <gale.michael@gmail.com>
 Section: misc
 Priority: optional
-Build-Depends: libglib2.0-dev, libsctp-dev, libssl-dev, pkg-config, debhelper (>= 9), libfixbuf (>=1.7.0), libpcap-dev, libpcre3-dev, libp0f
+Build-Depends: libglib2.0-dev, libsctp-dev, libssl-dev, pkg-config, debhelper (>= 9), libfixbuf (>=1.7.0), libpcap-dev, libpcre3-dev
 XBS-Buildhost: ${hostname}
 XBS-Dgit: ${dgit}
 
 Package: yaf
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, libglib2.0-0, libsctp1, libssl1.0.0, libfixbuf (>=1.7.0), libpcap, libpcre3, libp0f
+Depends: ${shlibs:Depends}, ${misc:Depends}, libglib2.0-0, libsctp1, libssl1.0.0, libfixbuf (>=1.7.0), libpcap, libpcre3
 Description: Yet another netflow tool (yaf) is a netflow emitter
  Data can be read in from an interface or tcpdump files, for more information
  visit: https://tools.netsa.cert.org/yaf/docs.html

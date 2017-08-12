@@ -4,4 +4,4 @@
 		dh $@
 
 override_dh_auto_configure:
-		dh_auto_configure -- --disable-static --enable-applabel --enable-mpls --enable-plugins --enable-fpexporter --enable-p0fprinter
+		dh_auto_configure -- --disable-static --enable-applabel --enable-mpls --enable-plugins --enable-fpexporter

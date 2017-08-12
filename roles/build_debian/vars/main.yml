@@ -8,6 +8,7 @@ required_packages:
   - libssl-dev
   - pkg-config
   - debhelper
+  - equivs
 
 url_base: "http://tools.netsa.cert.org/releases"
 
@@ -15,5 +16,5 @@ download_tmp: "/tmp"
 
 build_items:
   yaf: "2.8.4"
-  silk: "3.15.0"
+  silk: "3.16.0"
   libfixbuf: "1.7.1"

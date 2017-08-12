@@ -7,6 +7,15 @@
   tags:
     - build_deb
 
+- name: Install build dependencies
+  command: "mk-build-deps -i -r"
+  args:
+    chdir: "{{ build_location }}/{{ src }}"
+  become: yes
+  register: mk_build_deps_result
+  tags:
+    - build_deb
+
 - name: Building deb
   command: "debuild -us -uc -b"
   args:

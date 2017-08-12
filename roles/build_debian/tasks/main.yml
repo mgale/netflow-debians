@@ -5,11 +5,10 @@
   delegate_to: localhost
   become: yes
   become_user: "{{ lookup('env', 'USER') }}"
+  tags:
+    - always
 
 - include: install_packages.yml
 - include: create_build_env.yml
 
 - include: create_deb.yml
-  with_items:
-    - "trusty"
-    - "xenial"
