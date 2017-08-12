@@ -8,7 +8,7 @@ XBS-Dgit: ${dgit}
 
 Package: yaf
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, libglib2.0-0, libsctp1, libssl1.0.0, libfixbuf (>=1.7.0), libpcap, libpcre3
+Depends: ${shlibs:Depends}, ${misc:Depends}, libglib2.0-0, libsctp1, libssl1.0.0, libfixbuf (>=1.7.0), libpcap0.8, libpcre3
 Description: Yet another netflow tool (yaf) is a netflow emitter
  Data can be read in from an interface or tcpdump files, for more information
  visit: https://tools.netsa.cert.org/yaf/docs.html
